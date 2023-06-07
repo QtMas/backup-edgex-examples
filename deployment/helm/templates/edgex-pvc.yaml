@@ -1,0 +1,277 @@
+# Copyright (C) 2022 Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: consul-config
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: consul-data
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 512Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kuiper-data
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+{{- if .Values.edgex.security.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: edgex-secrets
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.sharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.sharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 8Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: edgex-init
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.sharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.sharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vault-file
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vault-logs
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vault-config
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 8Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-config
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 8Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: consul-acl-token
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 8Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: device-onvif-camera
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: device-usb-camera
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-rfid-llrp-inventory
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nats-server
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kuiper-sources
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kuiper-connections
+spec:
+  {{- if (eq .Values.edgex.storage.useHostPath true)}}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{.Values.edgex.storage.nonSharedVolumesClassName}}"
+  {{- end }}
+  accessModes:
+    - {{.Values.edgex.storage.nonSharedVolumesAccessMode}}
+  resources:
+    requests:
+      storage: 128Mi
+{{- end }}
